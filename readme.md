@@ -11,6 +11,7 @@ Download the PrimeCounter.jar
     java -jar PrimeCounter [N] [num of threads]
 
 e.g.
+
     java -jar PrimeCounter 999999 4
     java -jar PrimeCounter 9999999 16
 
