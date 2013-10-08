@@ -8,12 +8,31 @@ Well...this code is not the most elegant nor efficient code, I think it might be
 
 Download the PrimeCounter.jar
 
-    java -jar PrimeCounter [N] [num of threads]
+    java -jar PrimeCounter.jar [N] [num of threads]
 
 e.g.
 
-    java -jar PrimeCounter 999999 4
-    java -jar PrimeCounter 9999999 16
+    java -jar PrimeCounter.jar 999999 4
+    java -jar PrimeCounter.jar 9999999 16
+
+### Building
+Using Ant, you can build the project by running "ant"
+
+    > ant
+    Buildfile: /home/jason/git/primecounter/build.xml
+
+	init:
+	    [mkdir] Created dir: /home/jason/git/primecounter/bin
+
+	compile:
+	    [javac] Compiling 2 source files to /home/jason/git/primecounter/bin
+
+	dist:
+	    [mkdir] Created dir: /home/jason/git/primecounter/dist/lib
+	      [jar] Building jar: /home/jason/git/primecounter/dist/lib/PrimeCounter.jar
+
+	BUILD SUCCESSFUL
+	Total time: 0 seconds
 
 
 ### Observations
