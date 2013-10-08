@@ -25,7 +25,6 @@ public class CountJob implements Callable<Integer> {
 		for(int i=start;i<end;i++){
 			if(isPrime(i)){
 				result++;
-				//System.out.println(i + " ");
 			}
 		}
 		return result;
