@@ -1,10 +1,8 @@
 package com.madcoda.primes;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+
 
 public class Main {
 	
@@ -26,40 +24,20 @@ public class Main {
 	
 	
 	public void run(){
+		
+		ExecutorService threadpool = Executors.newFixedThreadPool(this.threads);
+		
+		PrimalityTester primeTester = new DefaultPrimalityTester();
+		primeTester.setThreadPool(threadpool);
+		
+		PrimeCounter counter = new DefaultPrimeCounter();
+		counter.setThreadPool(threadpool);
+		counter.setPrimalityTester(primeTester);
+		
 		start();
-		
-		try{
-			if(threads == 1){
-				CountJob job = new CountJob(0, limit);
-				this.result = job.call();
-			}else{
-				
-				ExecutorService threadpool = Executors.newFixedThreadPool(threads);
-				
-				List<Future<Integer>> tasks = new ArrayList<Future<Integer>>(threads);
-				
-				int batchSize = limit/threads;
-				for(int i=1;i<=threads;i++){
-					int currStart = batchSize *(i-1);
-					int currLimit = batchSize * i ;
-					if(i == threads)
-						currLimit = limit;
-					CountJob job = new CountJob(currStart, currLimit);
-					Future<Integer> future = threadpool.submit(job);
-					tasks.add(future);
-				}
-				
-				//collect
-				for(Future<Integer> task : tasks){
-					this.result += task.get();
-				}
-				threadpool.shutdown();
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
+		this.result = counter.count(0, limit, threads);
 		stop();
+		threadpool.shutdown();
 	}
 	
 	public void start(){
